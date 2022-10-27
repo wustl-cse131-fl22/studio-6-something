@@ -1,5 +1,8 @@
 package studio6;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 public class RecursiveMethods {
@@ -53,12 +56,31 @@ public class RecursiveMethods {
 	 * @return an array with the same data as the input but it reverse order
 	 */
 	public static int[] toReversed(int[] array) {
-		
-			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
+		if(array.length==0) {
+			return new int[0];		}
+			int a = array.length;
+			int[] reversed =Arrays.copyOf(array,a);
+			
+			
+			System.out.println();
+			return reverse(reversed,a-1,0); 
 		
 	}
+	public static int[] reverse(int[] array, int  i, int j) {
+		 if(array.length%2==0&&i==array.length/2.0-1) {
+				return array;
+			}else if(array.length%2==1&&i==array.length/2.0-0.5) {
+				return array;
+			}
+		int temp;
+		 temp =array[i];
+		 array[i]= array[j];
+		 array[j]=temp;
+		
+					return reverse( array, --i,++j);
 
+		
+	}
 	/**
 	 * @param xCenter                       x-coordinate of the center of the circle
 	 *                                      at the current depth
@@ -69,9 +91,18 @@ public class RecursiveMethods {
 	 * @param radiusMinimumDrawingThreshold radius above which drawing should occur
 	 */
 	public static void circlesUponCircles(double xCenter, double yCenter, double radius,
+			
 			double radiusMinimumDrawingThreshold) {
-		
-		// FIXME
+		StdDraw.circle(xCenter, yCenter, radius);
+		StdDraw.circle(xCenter+radius, yCenter, radius/3);
+		StdDraw.circle(xCenter-radius, yCenter, radius/3);
+		StdDraw.circle(xCenter, yCenter+radius, radius/3);
+		StdDraw.circle(xCenter, yCenter-radius, radius/3);
+
+	if(radius>radiusMinimumDrawingThreshold) {
+		circlesUponCircles(xCenter,yCenter,radius/3,radiusMinimumDrawingThreshold);
 	}
+	}
+	
 
 }
